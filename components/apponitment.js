@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Button, FlatList, Image } from 'react-native';
+import { StyleSheet, Text, View, Button, FlatList } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 /* import AsyncStorage from '@react-native-community/async-storage'; */
 import axios from 'axios'
 
-export default function Home({ navigation }){
 
-  const [branchs, setBranchs] = useState([]);
+export default function Appointment({ navigation }) {
+
+  //LEEER TODOS LOS ID DEL LOCALSTORAGE:
+  // idBranch
+  // idService
+  // idEmployee
+
+
+  const [appointments, setappointments] = useState([]);
 
   useEffect(() => {
     axios({
@@ -28,7 +35,7 @@ export default function Home({ navigation }){
   }, []); */
 
 
-  return(
+  return (
     <View>
       <Text>Nuestras sedes:</Text>
       <FlatList
@@ -48,7 +55,7 @@ export default function Home({ navigation }){
         keyExtractor={(item) => `${item.id}`}
       />
     </View>
-    
+
   );
 
 }

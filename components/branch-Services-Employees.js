@@ -5,42 +5,34 @@ import { createStackNavigator } from '@react-navigation/stack';
 /* import AsyncStorage from '@react-native-community/async-storage'; */
 import axios from 'axios'
 
-export default function Home({ navigation }){
 
-  const [branchs, setBranchs] = useState([]);
+export default function BranchServicesEmployees({ navigation }) {
+
+  const [selectEmployee, setSelectEmployee] = useState([]);
 
   useEffect(() => {
+    //Hago un get del LocalStorage de idBranch
     axios({
       method: 'GET',
       baseURL: process.env.REACT_APP_SERVER_URL,
-      url: '/branchs/all'
+      url: `/branchs/${idBranch}/employees`//corregir Ruta - REVISAR BIEN!!!!
     })
-      .then(({ data }) => setBranchs(data));
+      .then(({ data }) => setSelectEmployee(data));
   }, []);
 
-/*   useEffect(() => {
-    AsyncStorage.getItem('token')
-      .then(value => {
-        if(!value) {
-          navigation.replace('Home')
-        }
-      })
-  }, []); */
-
-
-  return(
+  return (
     <View>
-      <Text>Nuestras sedes:</Text>
+      <Text>Selecciona tu artista:</Text>
       <FlatList
-        data={branchs}
+        data={selectEmployee}
         renderItem={({ item }) => (
           <View>
-            <Text >{item.branchName}</Text>
-            <Image >{item.branchImage}</Image>
+            <Image >{item.employeeImage}</Image>
+            <Text >{item.employeeName}</Text>
             <Button
-              title="Ir"
-              onPress={() => navigation.navigate('Branch', {
-                id: item.id
+              title="Seleccionar"
+              onPress={() => navigation.navigate('Login', {
+                id: item.id //Guardar este id en el LocalStorage!!!! como idEmployee
               })}
             />
           </View>
@@ -48,7 +40,7 @@ export default function Home({ navigation }){
         keyExtractor={(item) => `${item.id}`}
       />
     </View>
-    
+
   );
 
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TextInput, Switch, Picker, Button } from 'react-native';
 import axios from 'axios';
 
@@ -16,10 +16,20 @@ export default function Login() {
 
     axios({
       method: 'POST',
-      url: 'http://localhost:8080',
+      baseURL: process.env.REACT_APP_SERVER_URL,
+      url: '/login',
       data,
     })
   }
+
+/*   useEffect(() => {
+  AsyncStorage.getItem('token')
+    .then(value => {
+      if(!value) {
+        navigation.replace('Home')
+      }
+    })
+}, []); */
 
   return (
     <View style={styles.container}>
@@ -38,8 +48,14 @@ export default function Login() {
       />
 
       <Button
-        onPress={handleSubmit}
         title="Enviar"
+        onPress={handleSubmit}
+        
+      />
+      <Text>¿No Tienes una cuenta aún?, Regístrate!</Text>
+      <Button
+        title="Registrarse"
+        onPress={() => navigation.navigate('SignUp')}
       />
     </View>
   );

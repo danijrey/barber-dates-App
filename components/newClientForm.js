@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TextInput, Switch, Picker, Button } from 'react-native';
 import axios from 'axios';
 
@@ -26,9 +26,12 @@ export default function SignUp() {
 
     axios({
       method: 'POST',
-      url: 'http://localhost:8080',
+      baseURL: process.env.REACT_APP_SERVER_URL,
+      url: '/clients/create',
       data,
-    })
+    }).then(
+      //Redireccionar a 'Appointment'
+    )
   }
 
   return (
@@ -70,8 +73,8 @@ export default function SignUp() {
       />
 
       <Button
-        onPress={handleSubmit}
         title="Enviar"
+        onPress={handleSubmit}
       />
     </View>
   );
