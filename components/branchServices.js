@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Button, FlatList } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-/* import AsyncStorage from '@react-native-community/async-storage'; */
+import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios'
 
 
@@ -10,35 +8,83 @@ export default function BranchServices({ navigation }) {
 
   const [services, setServices] = useState([]);
 
+  const [branchId, setBranchId] = useState('');
+
   useEffect(() => {
+
+    AsyncStorage.getItem('branchId')
+      .then(value => setBranchId(value))
+
+  }, []);
+ 
+
+  useEffect(() => {
+
+
     axios({
       method: 'GET',
-      baseURL: process.env.REACT_APP_SERVER_URL,
-      url: `/branchs/${id}/services/all`//corregir Ruta
+      baseURL: "http://localhost:8080",
+      url: `/branchs/${branchId}/services/list`
     })
-      .then(({ data }) => setServices(data));
-  }, []);
+      .then(({ data }) => setServices(data[0].Services));
+      console.log(services);
 
+  }, [branchId]);
+
+
+  const storeData = async (id) => {
+    try {
+      await AsyncStorage.setItem('serviceId', id)
+      console.log(id)
+    } catch (error) {
+    }
+  }
+  console.log(services)
   return (
     <View>
       <Text>En nuestra sede te prestamos éstos servicios:</Text>
-      <FlatList
-        data={services}
-        renderItem={({ item }) => (
-          <View>
-            <Text >{item.serviceName}</Text>
-            <Text >{item.serviceCost}</Text>
-            <Text >{item.serviceDuration}</Text>
-            <Button
-              title="Seleccionar"
-              onPress={() => navigation.navigate('Select', {
-                id: item.id
-              })} //Guardar este Id en el LocalStotage!!! como idService
-            />
-          </View>
-        )}
-        keyExtractor={(item) => `${item.id}`}
-      />
+      
+      {services && services.length > 0 &&  (
+      <>
+        <FlatList
+          data={services}
+          renderItem={({ item }) => (
+            <View>
+              
+                  <Text >{ item.serviceName }</Text>
+                  <Text >{ item.serviceCost }</Text>
+                  <Text >{ item.serviceDuration }</Text>
+                  
+                  <Button
+                    title="Seleccionar"
+                    onPress={() => {
+                      storeData(item.id);
+                      navigation.navigate('Select', { id: item.id });
+                    }}//Guardar este Id en el LocalStotage!!! como serviceId
+                />
+              
+            </View>
+          )}
+          keyExtractor={(item) => `${item.id}`}
+        />
+      </>
+      )}
+      
     </View>
   );
 }
+
+/* const getData = async () => {
+  try {
+    const value = await AsyncStorage.getItem('branchId');
+    console.log(value);
+    return (value);
+  } catch (error) {
+    // error reading value
+  }
+
+} 
+
+
+
+*/

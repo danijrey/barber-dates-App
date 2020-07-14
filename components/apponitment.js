@@ -1,25 +1,46 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Button, FlatList } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-/* import AsyncStorage from '@react-native-community/async-storage'; */
+
+import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios'
 
 
-export default function Appointment({ navigation }) {
-
-  //LEEER TODOS LOS ID DEL LOCALSTORAGE:
-  // idBranch
-  // idService
-  // idEmployee
-
+export default function Appointment({ route, navigation }) {
 
   const [appointments, setappointments] = useState([]);
+
+  const [branchId, setBranchId] = useState('');
+
+  const [serviceId, setServiceId] = useState('');
+
+  const [employeeId, setEmployeeId] = useState('');
+
+  useEffect(() => {
+
+    AsyncStorage.getItem('branchId')
+      .then(value => setBranchId(value))
+
+  }, []);
+
+  useEffect(() => {
+
+    AsyncStorage.getItem('serviceId')
+      .then(value => setServiceId(value))
+
+  }, []);
+
+  useEffect(() => {
+
+    AsyncStorage.getItem('employeeId')
+      .then(value => setEmployeeId(value))
+
+  }, []);
+
 
   useEffect(() => {
     axios({
       method: 'GET',
-      baseURL: process.env.REACT_APP_SERVER_URL,
+      baseURL: 'http://localhost:8080',
       url: '/branchs/all'
     })
       .then(({ data }) => setBranchs(data));

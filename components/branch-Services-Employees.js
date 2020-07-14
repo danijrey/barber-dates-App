@@ -1,24 +1,48 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Button, FlatList, Image } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-/* import AsyncStorage from '@react-native-community/async-storage'; */
+import { StyleSheet, Text, View, Button, FlatList, Image, ImageBackground } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios'
 
 
-export default function BranchServicesEmployees({ navigation }) {
+export default function BranchServicesEmployees({ route, navigation }) {
 
   const [selectEmployee, setSelectEmployee] = useState([]);
 
+  const [branchId, setBranchId] = useState('');
+
+  const [serviceId, setServiceId] = useState('');
+
   useEffect(() => {
-    //Hago un get del LocalStorage de idBranch
+
+    AsyncStorage.getItem('branchId')
+      .then(value => setBranchId(value))
+
+  }, []);
+
+  useEffect(() => {
+
+    AsyncStorage.getItem('serviceId')
+      .then(value => setServiceId(value))
+
+  }, []);
+
+  useEffect(() => {
+
     axios({
       method: 'GET',
-      baseURL: process.env.REACT_APP_SERVER_URL,
-      url: `/branchs/${idBranch}/employees`//corregir Ruta - REVISAR BIEN!!!!
+      baseURL: 'http://localhost:8080',
+      url: `/branchs/${branchId}/employees/list`//corregir Ruta - REVISAR BIEN!!!!
     })
       .then(({ data }) => setSelectEmployee(data));
-  }, []);
+
+  }, [branchId]);
+
+  const storeData = async (id) => {
+    try {
+      await AsyncStorage.setItem('employeeId', id)
+    } catch (error) {
+    }
+  }
 
   return (
     <View>
@@ -27,13 +51,19 @@ export default function BranchServicesEmployees({ navigation }) {
         data={selectEmployee}
         renderItem={({ item }) => (
           <View>
-            <Image >{item.employeeImage}</Image>
+            <ImageBackground
+              style={styles.images}
+              source={{ uri: item.employeeImage }}
+            />
             <Text >{item.employeeName}</Text>
             <Button
               title="Seleccionar"
-              onPress={() => navigation.navigate('Login', {
-                id: item.id //Guardar este id en el LocalStorage!!!! como idEmployee
+              onPress={() => {
+                storeData(item.id);
+                navigation.navigate('Login', {
+                id: item.id //Guardar este id en el LocalStorage!!!! como employeeId
               })}
+            }
             />
           </View>
         )}
@@ -44,3 +74,25 @@ export default function BranchServicesEmployees({ navigation }) {
   );
 
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold'
+  },
+  body: {
+    fontSize: 16
+  },
+  images: {
+    width: 300,
+    height: 250,
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
+});

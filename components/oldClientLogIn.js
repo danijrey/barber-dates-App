@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TextInput, Switch, Picker, Button } from 'react
 import axios from 'axios';
 
 
-export default function Login() {
+export default function Login({ navigation }) {
 
   const [clientEmail, setClientEmail] = useState('');
   const [clientPassword, setClientPassword] = useState('');
@@ -16,7 +16,7 @@ export default function Login() {
 
     axios({
       method: 'POST',
-      baseURL: process.env.REACT_APP_SERVER_URL,
+      baseURL: 'http://localhost:8080',
       url: '/login',
       data,
     })

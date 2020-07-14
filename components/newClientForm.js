@@ -3,15 +3,13 @@ import { StyleSheet, Text, View, TextInput, Switch, Picker, Button } from 'react
 import axios from 'axios';
 
 
-export default function SignUp() {
+export default function SignUp({ route, navigation }) {
   
   const [clientName, setClientName] = useState('');
   const [clientLastname, setClientLastname] = useState('');
   const [clientTelephone, setClientTelephone] = useState('');
   const [clientEmail, setClientEmail] = useState('');
   const [clientPassword, setClientPassword] = useState('');
-
-  const [terms, setTerms] = useState(false);
  
 
   function handleSubmit() {
@@ -20,13 +18,12 @@ export default function SignUp() {
       clientLastname, 
       clientTelephone, 
       clientEmail, 
-      clientPassword, 
-      terms, 
+      clientPassword
       };
 
     axios({
       method: 'POST',
-      baseURL: process.env.REACT_APP_SERVER_URL,
+      baseURL: 'http://localhost:8080',
       url: '/clients/create',
       data,
     }).then(
@@ -67,11 +64,6 @@ export default function SignUp() {
         secureTextEntry={true}
         defaultValue={clientPassword}
       />
-      <Switch
-        onValueChange={() => setTerms(!terms)}
-        value={terms}
-      />
-
       <Button
         title="Enviar"
         onPress={handleSubmit}
