@@ -1,14 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TextInput, Switch, Picker, Button } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios';
 
 
-export default function Login({ navigation }) {
+export default function Login({ route, navigation }) {
 
   const [clientEmail, setClientEmail] = useState('');
   const [clientPassword, setClientPassword] = useState('');
 
-  function handleSubmit() {
+  const Nav = () => {
+    navigation.navigate('Appointment')
+  }
+
+  
+  const handleSubmit = async (navigation) => {
     const data = { 
       clientEmail, 
       clientPassword,
@@ -19,8 +27,17 @@ export default function Login({ navigation }) {
       baseURL: 'http://localhost:8080',
       url: '/login',
       data,
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then(({ data }) => {
+      AsyncStorage.setItem("token", data.token)
+      Nav();
     })
-  }
+    
+
+}
+
 
 /*   useEffect(() => {
   AsyncStorage.getItem('token')
@@ -52,7 +69,7 @@ export default function Login({ navigation }) {
         onPress={handleSubmit}
         
       />
-      <Text>¿No Tienes una cuenta aún?, Regístrate!</Text>
+      <Text style={styles.text}>¿No Tienes una cuenta aún?, Regístrate!</Text>
       <Button
         title="Registrarse"
         onPress={() => navigation.navigate('SignUp')}
@@ -64,14 +81,34 @@ export default function Login({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    flexWrap: 'wrap',
+    maxWidth: 'auto',
+    backgroundColor: '#272c33',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#f2a951',
+    justifyContent: 'center'
+  },
+  text: {
+    fontSize: 17,
+    marginBottom: 15,
+    color: '#f2a951',
+    alignItems: 'center',
   },
   input: {
     width: 300,
     height: 40,
+    color: '#f2a951',
     borderWidth: 1,
     borderColor: 'black',
+  },
+  body: {
+    fontSize: 16
   }
 });
+
+

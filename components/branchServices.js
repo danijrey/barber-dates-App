@@ -41,8 +41,8 @@ export default function BranchServices({ navigation }) {
   }
   console.log(services)
   return (
-    <View>
-      <Text>En nuestra sede te prestamos éstos servicios:</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>En nuestra sede te prestamos éstos servicios:</Text>
       
       {services && services.length > 0 &&  (
       <>
@@ -51,9 +51,9 @@ export default function BranchServices({ navigation }) {
           renderItem={({ item }) => (
             <View>
               
-                  <Text >{ item.serviceName }</Text>
-                  <Text >{ item.serviceCost }</Text>
-                  <Text >{ item.serviceDuration }</Text>
+              <Text style={styles.text}>{ item.serviceName }</Text>
+              <Text style={styles.text}>{ item.serviceCost }</Text>
+              <Text style={styles.text}>{ item.serviceDuration }</Text>
                   
                   <Button
                     title="Seleccionar"
@@ -74,17 +74,44 @@ export default function BranchServices({ navigation }) {
   );
 }
 
-/* const getData = async () => {
-  try {
-    const value = await AsyncStorage.getItem('branchId');
-    console.log(value);
-    return (value);
-  } catch (error) {
-    // error reading value
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexWrap: 'wrap',
+    maxWidth: 'auto',
+    padding: 20,
+    backgroundColor: '#272c33',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#765d3f',
+    justifyContent: 'center'
+  },
+  text: {
+    fontSize: 20,
+    marginBottom: 15,
+    color: '#f2a951',
+    alignItems: 'center',
+  },
+  body: {
+    fontSize: 16
+  },
+  images: {
+    width: 350,
+    height: 200,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttons: {
+    /* alignItems: "flex-start", */
+    flexWrap: 'wrap',
+    marginTop: 10,
+    alignContent: 'space-around',
+  },
+  btn: {
+    marginTop: 10,
   }
-
-} 
-
-
-
-*/
+});

@@ -45,7 +45,7 @@ useEffect(() => {
 
   return (
     <View style={styles.container}>
-      <Text>Te presentamos nuestros artistas:</Text>
+      <Text style={styles.title}>Te presentamos nuestros artistas:</Text>
       <FlatList
         data={employees}
         renderItem={({ item }) => (
@@ -54,8 +54,8 @@ useEffect(() => {
               style={styles.images}
               source={{ uri: item.employeeImage }}
             />
-            <Text >{item.employeeName}</Text>
-            <Text >{item.employeeDescription}</Text>
+            <Text style={styles.subTitle}>{item.employeeName}</Text>
+            <Text style={styles.text}>{item.employeeDescription}</Text>
           </View>
         )}
         keyExtractor={(item) => `${item.id}`}
@@ -68,20 +68,37 @@ useEffect(() => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    flexWrap: 'wrap',
+    maxWidth: 'auto',
+    backgroundColor: '#272c33',
     alignItems: 'center',
+    padding: 20,
     justifyContent: 'center',
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    color: '#765d3f',
+    justifyContent: 'center'
+  },
+  subTitle: {
+    fontSize: 20,
+    marginBottom: 15,
+    color: '#f2a951',
+    alignItems: 'center',
+  },
+  text: {
+    fontSize: 17,
+    marginBottom: 15,
+    color: '#f2a951',
+    alignItems: 'center',
   },
   body: {
     fontSize: 16
   },
   images: {
-    width: 300,
-    height: 250,
+    width: 200,
+    height: 150,
     justifyContent: 'center',
     alignItems: 'center',
   }

@@ -24,11 +24,11 @@ export default function BranchContact({ route, navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text>Contacto:</Text>
+      <Text style={styles.title}>Contacto:</Text>
 
       {branch && (
         <View>
-          <Text>{branch.branchTelephone}</Text>
+          <Text style={styles.text}>{branch.branchTelephone}</Text>
         </View>
       )}
     </View>
@@ -39,13 +39,23 @@ export default function BranchContact({ route, navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    flexWrap: 'wrap',
+    maxWidth: 'auto',
+    backgroundColor: '#272c33',
     alignItems: 'center',
     justifyContent: 'center',
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    color: '#f2a951',
+    justifyContent: 'center'
+  },
+  text: {
+    fontSize: 17,
+    marginBottom: 15,
+    color: '#f2a951',
+    alignItems: 'center',
   },
   body: {
     fontSize: 16

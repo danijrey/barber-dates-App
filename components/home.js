@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Button, FlatList, Image, ImageBackground } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+ import { Logo } from '../assets/Logo.png';
 import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios'
 
@@ -31,6 +32,11 @@ export default function Home({ navigation }){
 
   return(
     <View style={styles.container}>
+      <Image
+        style={styles.imageLogo}
+        source={{ uri: 'https://res.cloudinary.com/danijrey/image/upload/v1594865375/LogoMakr_1LcE5u_lfdylc.png' }}
+      
+      />
       <Text style={styles.title}>Nuestras sedes:</Text>
       <FlatList
         data={branchs}
@@ -66,40 +72,49 @@ export default function Home({ navigation }){
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    flexWrap: 'wrap',
+    maxWidth: 'auto',
+    backgroundColor: '#272c33',
     alignItems: 'center',
     justifyContent: 'center',
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
+    color: '#765d3f',
     justifyContent: 'center'
   },
   text: {
-    fontSize: 18,
+    fontSize: 20,
+    marginBottom: 15,
+    color: '#f2a951',
     alignItems: 'center',
   },
   button: {
     fontSize: 18,
+    color: '#f2a951',
     alignItems: 'center',
     justifyContent: 'center'
+    
   },
   body: {
     fontSize: 16
   },
+  imageLogo:{
+    display: 'flex',
+    padding: 20,
+    width: 350,
+    height: 200,
+  },
   images:{
-    width: 400,
-    height: 300,
+    marginTop: 15,
+    padding: 20,
+    display: 'flex',
+    width: 350,
+    height: 200,
     justifyContent: 'center',
     alignItems: 'center',
   }
 });
 
-/*   useEffect(() => {
-    AsyncStorage.getItem('token')
-      .then(value => {
-        if(!value) {
-          navigation.replace('Home')
-        }
-      })
-  }, []); */
+/* { require('./my-icon.png') }  */

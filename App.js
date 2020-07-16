@@ -3,8 +3,6 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import AsyncStorage from '@react-native-community/async-storage';
-import axios from 'axios'
 import Home  from './components/home.js';
 import BranchHome from './components/branchHome.js';
 import BranchEmployees from './components/branchEmployees.js'

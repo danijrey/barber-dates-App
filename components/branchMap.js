@@ -24,11 +24,11 @@ export default function BranchMap({ route, navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text>Ubicación:</Text>
+      <Text style={styles.title}>Ubicación:</Text>
 
       {branch && (
         <View>
-          <Text>{branch.branchAdress}</Text>
+          <Text style={styles.text}>{branch.branchAdress}</Text>
         </View>
       )}
     </View>
@@ -37,18 +37,28 @@ export default function BranchMap({ route, navigation }) {
 };
 
 const styles = StyleSheet.create({
-        container: {
-        flex: 1,
-    backgroundColor: '#fff',
+  container: {
+    flex: 1,
+    flexWrap: 'wrap',
+    maxWidth: 'auto',
+    backgroundColor: '#272c33',
     alignItems: 'center',
     justifyContent: 'center',
   },
   title: {
-        fontSize: 24,
-    fontWeight: 'bold'
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#f2a951',
+    justifyContent: 'center'
+  },
+  text: {
+    fontSize: 17,
+    marginBottom: 15,
+    color: '#f2a951',
+    alignItems: 'center',
   },
   body: {
-        fontSize: 16
+    fontSize: 16
   }
 });
 

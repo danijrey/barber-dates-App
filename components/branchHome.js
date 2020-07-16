@@ -29,19 +29,21 @@ export default function BranchHome({ route, navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text>Sede:</Text>
+      <Text style={styles.title}>Sede:</Text>
 
       {branch && (
         <View>
-          <Text>{branch.branchName}</Text>
+          <Text style={styles.text} >{branch.branchName}</Text>
           <ImageBackground 
             style={styles.images}
             source={{ uri: branch.branchImage }}
             />
-          <Text>{branch.branchDescrption}</Text>
+          <Text style={styles.text}>{branch.branchDescrption}</Text>
         </View>
       )}
+      <View style={styles.buttons}>
       <Button
+        style={styles.btn}
         title="Conocer Barberos"
         onPress={() => {
           navigation.navigate('Barbers', {
@@ -50,6 +52,7 @@ export default function BranchHome({ route, navigation }) {
         } }
       />
       <Button
+        style={styles.btn}
         title="Servicios"
         onPress={() =>{
           storeData(branch.id);
@@ -57,17 +60,20 @@ export default function BranchHome({ route, navigation }) {
         } } //Guardar este ID en el LocalStorage!!!!! como idBranch
       />
       <Button
+        style={styles.btn}
         title="¿Cómo llegar?"
         onPress={() => navigation.navigate('Map', {
           id: branch.id
         })}
       />
       <Button
+        style={styles.btn}
         title="Contacto"
         onPress={() => navigation.navigate('Contact', {
           id: branch.id
         })}
       />
+      </View>
     </View>
 
   );
@@ -77,21 +83,40 @@ export default function BranchHome({ route, navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    flexWrap: 'wrap',
+    maxWidth: 'auto',
+    backgroundColor: '#272c33',
     alignItems: 'center',
     justifyContent: 'center',
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    color: '#765d3f',
+    justifyContent: 'center'
+  },
+  text: {
+    fontSize: 20,
+    marginBottom: 15,
+    color: '#f2a951',
+    alignItems: 'center',
   },
   body: {
     fontSize: 16
   },
   images: {
-    width: 400,
-    height: 300,
+    width: 350,
+    height: 200,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  buttons: {
+    /* alignItems: "flex-start", */
+    flexWrap: 'wrap',
+    marginTop: 10,
+    alignContent: 'space-around',
+  },
+  btn:{
+    marginTop: 10,
   }
 });
