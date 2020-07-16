@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Button, FlatList } from 'react-native';
+import { StyleSheet, Text, View, Button, FlatList, Image } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios'
 
@@ -42,6 +42,13 @@ export default function BranchServices({ navigation }) {
   console.log(services)
   return (
     <View style={styles.container}>
+      <View>
+        <Image
+          style={styles.imageDeco}
+          source={{ uri: 'https://res.cloudinary.com/danijrey/image/upload/v1594923438/LogoMakr_9u9qDe_jmdblh.png' }}
+        />
+
+      </View>
       <Text style={styles.title}>En nuestra sede te prestamos éstos servicios:</Text>
       
       {services && services.length > 0 &&  (
@@ -50,12 +57,16 @@ export default function BranchServices({ navigation }) {
           data={services}
           renderItem={({ item }) => (
             <View>
-              
-              <Text style={styles.text}>{ item.serviceName }</Text>
-              <Text style={styles.text}>{ item.serviceCost }</Text>
-              <Text style={styles.text}>{ item.serviceDuration }</Text>
-                  
+              <View style={styles.containerInfo}>
+                <Text></Text>
+                <Text style={styles.subTitle}>{ item.serviceName }</Text>
+                <Text>Costo:</Text>
+                <Text style={styles.text}>{ item.serviceCost }</Text>
+                <Text>Duración</Text>
+                <Text style={styles.text}>{ item.serviceDuration }</Text>
+              </View> 
                   <Button
+                    color='#765d3f'
                     title="Seleccionar"
                     onPress={() => {
                       storeData(item.id);
@@ -84,16 +95,40 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  containerInfo: {
+    flex: 1,
+    flexWrap: 'wrap',
+    maxWidth: 'auto',
+    margin: 15,
+    padding: 10,
+    borderRadius: 10,
+    backgroundColor: '#f2a951',
+    opacity: 0.4,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  imageDeco: {
+    width: 400,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
     color: '#765d3f',
     justifyContent: 'center'
   },
+  subTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#272c33',
+    justifyContent: 'center'
+  },
   text: {
     fontSize: 20,
     marginBottom: 15,
-    color: '#f2a951',
+    color: '#272c33',
     alignItems: 'center',
   },
   body: {

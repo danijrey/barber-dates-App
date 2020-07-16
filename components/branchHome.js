@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Button, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, Button, ImageBackground, Image } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios'
 
@@ -29,11 +29,16 @@ export default function BranchHome({ route, navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Sede:</Text>
-
+      <View>
+         <Image
+          style={styles.imageLogo}
+          source={{ uri: 'https://res.cloudinary.com/danijrey/image/upload/v1594865375/LogoMakr_1LcE5u_lfdylc.png' }}
+        /> 
+        
+      </View>
       {branch && (
-        <View>
-          <Text style={styles.text} >{branch.branchName}</Text>
+        <View style={styles.branch}>
+          <Text style={styles.title} >{branch.branchName}</Text>
           <ImageBackground 
             style={styles.images}
             source={{ uri: branch.branchImage }}
@@ -42,37 +47,53 @@ export default function BranchHome({ route, navigation }) {
         </View>
       )}
       <View style={styles.buttons}>
-      <Button
-        style={styles.btn}
-        title="Conocer Barberos"
-        onPress={() => {
-          navigation.navigate('Barbers', {
-            id: branch.id
-          })
-        } }
-      />
-      <Button
-        style={styles.btn}
-        title="Servicios"
-        onPress={() =>{
-          storeData(branch.id);
-          navigation.navigate('Services', { id: branch.id });
-        } } //Guardar este ID en el LocalStorage!!!!! como idBranch
-      />
-      <Button
-        style={styles.btn}
-        title="¿Cómo llegar?"
-        onPress={() => navigation.navigate('Map', {
-          id: branch.id
-        })}
-      />
-      <Button
-        style={styles.btn}
-        title="Contacto"
-        onPress={() => navigation.navigate('Contact', {
-          id: branch.id
-        })}
-      />
+        <View style={styles.buttonsA}>
+          <View style={styles.buttonsAA}>
+            <Button
+              style={styles.btnA}
+              color='#765d3f'
+              title="Artistas"
+              onPress={() => {
+                navigation.navigate('Barbers', {
+                  id: branch.id
+                })
+              } }
+            />
+          </View>
+          <View style={styles.buttonsAB}>
+            <Button
+              style={styles.btnA}
+              color='#765d3f'
+              title="Servicios"
+              onPress={() =>{
+                storeData(branch.id);
+                navigation.navigate('Services', { id: branch.id });
+              } } //Guardar este ID en el LocalStorage!!!!! como idBranch
+            />
+          </View>
+        </View>
+        <View style={styles.buttonsB}>
+          <View style={styles.buttonsBA}>
+            <Button
+              style={styles.btnB}
+              color= '#765d3f'
+              title="¿Cómo llegar?"
+              onPress={() => navigation.navigate('Map', {
+                id: branch.id
+              })}
+            />
+          </View>
+          <View style={styles.buttonsBB}>
+            <Button
+              style={styles.btnB}
+              color='#765d3f'
+              title="Contacto"
+              onPress={() => navigation.navigate('Contact', {
+                id: branch.id
+              })}
+            />
+          </View>
+        </View>
       </View>
     </View>
 
@@ -83,9 +104,14 @@ export default function BranchHome({ route, navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexWrap: 'wrap',
+    /* flexWrap: 'wrap', */
     maxWidth: 'auto',
     backgroundColor: '#272c33',
+    alignItems: 'center',
+    alignContent: 'space-around',
+    justifyContent: 'center',
+  },
+  branch:{
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -93,7 +119,8 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     color: '#765d3f',
-    justifyContent: 'center'
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   text: {
     fontSize: 20,
@@ -110,13 +137,43 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  buttons: {
-    /* alignItems: "flex-start", */
-    flexWrap: 'wrap',
-    marginTop: 10,
-    alignContent: 'space-around',
+  imageLogo: {
+/*     display: 'flex',
+    padding: 20, */
+    width: 350,
+    height: 200,
   },
-  btn:{
-    marginTop: 10,
+  buttons: {
+
+   
+  },
+  buttonsA: {
+    flexDirection: 'row',
+    margin: 10,
+    justifyContent: 'center',
+  },
+  buttonsB: {
+    flexDirection: 'row',
+    margin: 10,
+    justifyContent: 'center',
+  },
+  buttonsAA: {
+    margin: 10,
+    width: 130,
+  },
+  buttonsAB: {
+    margin: 10,
+    width: 130,
+  },
+
+  buttonsBA: {
+    margin: 10,
+    width: 130,
+  },
+  buttonsBB: {
+    margin: 10,
+    width: 130,
   }
+
 });
+/* flexDirection: 'row', */

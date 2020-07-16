@@ -50,6 +50,7 @@ export default function Login({ route, navigation }) {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.title}>Ingresa a tu cuenta</Text>
       <TextInput
         style={styles.input}
         placeholder="Ingresa tu e-mail"
@@ -65,15 +66,21 @@ export default function Login({ route, navigation }) {
       />
 
       <Button
+        color='#765d3f'
         title="Enviar"
         onPress={handleSubmit}
         
       />
-      <Text style={styles.text}>¿No Tienes una cuenta aún?, Regístrate!</Text>
-      <Button
-        title="Registrarse"
-        onPress={() => navigation.navigate('SignUp')}
-      />
+      <View style={styles.registro}>
+        <Text style={styles.text}>¿No tienes una cuenta aún?, Regístrate!</Text>
+        <View style={styles.registroBtn}>
+          <Button
+            color='#765d3f'
+            title="Registrarse"
+            onPress={() => navigation.navigate('SignUp')}
+          />
+        </View>
+      </View>
     </View>
   );
 }
@@ -106,8 +113,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'black',
   },
-  body: {
-    fontSize: 16
+  registro: {
+    marginTop: 30,
+    alignItems: 'center',
+  },
+    registroBtn: {
+    width: 130,
   }
 });
 

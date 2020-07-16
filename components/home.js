@@ -41,8 +41,8 @@ export default function Home({ navigation }){
       <FlatList
         data={branchs}
         renderItem={({ item }) => (
-
-          <View >
+          <>
+          <View style={styles.containerBranchs}>
             
             <ImageBackground
             style={styles.images}
@@ -51,8 +51,11 @@ export default function Home({ navigation }){
             
          
             <Text style={styles.text}>{item.branchName}</Text>
+          </View>
+          <View>
             <Button
               style={styles.button}
+              color='#765d3f'
               title="Ir"
               onPress={() => {
                 storeData(item.id);
@@ -60,6 +63,7 @@ export default function Home({ navigation }){
               }} //Guardar este ID en el LocalStorage!!!!! como idBranch
             />
           </View>
+          </>
         )}
         keyExtractor={(item) => `${item.id}`}
       />
@@ -74,6 +78,13 @@ const styles = StyleSheet.create({
     flex: 1,
     flexWrap: 'wrap',
     maxWidth: 'auto',
+    backgroundColor: '#272c33',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  containerBranchs: {
+    flex: 1,
+    flexWrap: 'wrap',
     backgroundColor: '#272c33',
     alignItems: 'center',
     justifyContent: 'center',

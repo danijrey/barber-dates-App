@@ -49,13 +49,16 @@ useEffect(() => {
       <FlatList
         data={employees}
         renderItem={({ item }) => (
-          <View>
+          <View style={styles.artist}>
+
             <ImageBackground 
               style={styles.images}
               source={{ uri: item.employeeImage }}
             />
             <Text style={styles.subTitle}>{item.employeeName}</Text>
-            <Text style={styles.text}>{item.employeeDescription}</Text>
+            <View style={styles.description}>
+              <Text style={styles.text}>{item.employeeDescription}</Text>
+            </View>
           </View>
         )}
         keyExtractor={(item) => `${item.id}`}
@@ -75,6 +78,17 @@ const styles = StyleSheet.create({
     padding: 20,
     justifyContent: 'center',
   },
+  artist: {
+    alignItems: 'center',
+    padding: 20,
+    justifyContent: 'center',
+  },
+  description: {
+    backgroundColor: '#765d3f',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 250,
+  },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
@@ -90,7 +104,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 17,
     marginBottom: 15,
-    color: '#f2a951',
+    color: '#272c33',
     alignItems: 'center',
   },
   body: {

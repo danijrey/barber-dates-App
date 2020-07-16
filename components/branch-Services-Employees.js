@@ -50,21 +50,24 @@ export default function BranchServicesEmployees({ route, navigation }) {
       <FlatList
         data={selectEmployee}
         renderItem={({ item }) => (
-          <View>
+          <View style={styles.containerEmployee}>
             <ImageBackground
               style={styles.images}
               source={{ uri: item.employeeImage }}
             />
             <Text style={styles.text}>{item.employeeName}</Text>
-            <Button
-              title="Seleccionar"
-              onPress={() => {
-                storeData(item.id);
-                navigation.navigate('Login', {
-                id: item.id //Guardar este id en el LocalStorage!!!! como employeeId
-              })}
-            }
-            />
+            <View style={styles.buttonSelect}>
+              <Button
+                color='#765d3f'
+                title="Seleccionar"
+                onPress={() => {
+                  storeData(item.id);
+                  navigation.navigate('Login', {
+                  id: item.id //Guardar este id en el LocalStorage!!!! como employeeId
+                })}
+              }
+              />
+            </View>
           </View>
         )}
         keyExtractor={(item) => `${item.id}`}
@@ -77,6 +80,15 @@ export default function BranchServicesEmployees({ route, navigation }) {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    flexWrap: 'wrap',
+    maxWidth: 'auto',
+    backgroundColor: '#272c33',
+    alignItems: 'center',
+    padding: 20,
+    justifyContent: 'center',
+  },
+  containerEmployee: {
     flex: 1,
     flexWrap: 'wrap',
     maxWidth: 'auto',
@@ -102,9 +114,10 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     color: '#f2a951',
     alignItems: 'center',
+    justifyContent: 'center',
   },
-  body: {
-    fontSize: 16
+  buttonSelect:{
+    width: 130,
   },
   images: {
     width: 200,

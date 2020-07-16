@@ -73,6 +73,7 @@ export default function SignUp({ route, navigation }) {
         defaultValue={clientPassword}
       />
       <Button
+        color='#765d3f'
         title="Enviar"
         onPress={handleSubmit}
       />
