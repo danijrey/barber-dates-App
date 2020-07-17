@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Button, FlatList } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
+import { Linking } from 'react-native'
 import axios from 'axios'
 
 
-export default function BranchContact({ route, navigation }) {
+
+export default function BranchContact({ route, navigation, Linking }) {
 
   const [branch, setBranch] = useState(null);
 
@@ -19,6 +21,7 @@ export default function BranchContact({ route, navigation }) {
 
   }, []);
 
+  
 
   return (
     <View style={styles.container}>
@@ -27,6 +30,11 @@ export default function BranchContact({ route, navigation }) {
       {branch && (
         <View>
           <Text style={styles.text}>{branch.branchTelephone}</Text>
+          <Button
+            color='#765d3f'
+            title="Llamar"
+            onPress={() => Linking.openURL(`tel:${branch.branchTelephone}`)}
+          />
         </View>
       )}
     </View>
@@ -46,7 +54,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#f2a951',
+    color: '#765d3f',
     justifyContent: 'center'
   },
   text: {
