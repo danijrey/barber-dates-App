@@ -35,6 +35,7 @@ export default function SignUp({ route, navigation }) {
       }
     }).then(({ data }) => {
       AsyncStorage.setItem("token", data.token)
+      AsyncStorage.setItem("clientId", data.clientId)
       Nav ();
     })
   }

@@ -20,6 +20,8 @@ export default function Appointment({ route, navigation }) {
 
   const [employeeId, setEmployeeId] = useState('');
 
+  const [clientId, setClientId] = useState('');
+
   const [branch, setBranch] = useState([]);
 
   const [service, setService] = useState([]);
@@ -51,6 +53,13 @@ export default function Appointment({ route, navigation }) {
 
     AsyncStorage.getItem('employeeId')
       .then(value => setEmployeeId(value))
+
+  }, []);
+
+  useEffect(() => {
+
+    AsyncStorage.getItem('clientId')
+      .then(value => setClientId(value))
 
   }, []);
 
@@ -87,17 +96,12 @@ export default function Appointment({ route, navigation }) {
 
   }, [branchId]);
 
-  console.log(employee)
-  console.log(service)
-  console.log(branch)
-  console.log(serviceDuration)
-  console.log(time)
-  console.log(date)
-
+  
   function SendDbAppointment() {
     const data={
       date,
       time,
+      ClientId: clientId,
       BranchId: branchId,
       ServiceId: serviceId,
       EmployeeId: employeeId
@@ -163,14 +167,15 @@ export default function Appointment({ route, navigation }) {
         <Picker.Item label="7:00 pm" value="19" />
       </Picker>  
 
-
-      <Button
-        color='#765d3f'
-        title="Confirmar"
-        onPress={() => navigation.navigate('Confirmed',
-          SendDbAppointment()
-        )}
-      />
+      <View style={styles.sendButton}>
+        <Button
+          color='#765d3f'
+          title="Confirmar"
+          onPress={() => navigation.navigate('Confirmed',
+            SendDbAppointment()
+          )}
+        />
+      </View>
     </View>
 
   )
@@ -215,5 +220,8 @@ const styles = StyleSheet.create({
   picker: {
     fontSize: 16,
     backgroundColor: '#272c33',
+  },
+  sendButton:{
+    margin: 10,
   }
 });

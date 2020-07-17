@@ -21,8 +21,7 @@ export default function BranchHome({ route, navigation }) {
   const storeData = async (id) => {
     try {
       await AsyncStorage.setItem('branchId', id);
-      console.log(id)
-    } catch (error) {
+     } catch (error) {
 
     }
   }

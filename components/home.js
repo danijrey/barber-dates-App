@@ -10,7 +10,6 @@ export default function Home({ navigation }){
   const storeData = async (id) => {
     try {
       await AsyncStorage.setItem('branchId', id);
-      console.log(id)
     } catch (error) {
 
     }

@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TextInput, Switch, Picker, Button } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios';
 
@@ -32,21 +30,12 @@ export default function Login({ route, navigation }) {
       }
     }).then(({ data }) => {
       AsyncStorage.setItem("token", data.token)
+      AsyncStorage.setItem("clientId", data.clientId)
       Nav();
     })
     
 
 }
-
-
-/*   useEffect(() => {
-  AsyncStorage.getItem('token')
-    .then(value => {
-      if(!value) {
-        navigation.replace('Home')
-      }
-    })
-}, []); */
 
   return (
     <View style={styles.container}>

@@ -27,7 +27,6 @@ export default function BranchServices({ navigation }) {
       url: `/branchs/${branchId}/services/list`
     })
       .then(({ data }) => setServices(data[0].Services));
-      console.log(services);
 
   }, [branchId]);
 
@@ -35,11 +34,9 @@ export default function BranchServices({ navigation }) {
   const storeData = async (id) => {
     try {
       await AsyncStorage.setItem('serviceId', id)
-      console.log(id)
     } catch (error) {
     }
   }
-  console.log(services)
   return (
     <View style={styles.container}>
 {/*       <View>
@@ -49,8 +46,9 @@ export default function BranchServices({ navigation }) {
         />
 
       </View> */}
-      <Text style={styles.title}>En nuestra sede te prestamos los siguientes servicios:</Text>
-      
+      <View style={styles.vTitle}>
+        <Text style={styles.title}>En nuestra sede te prestamos los siguientes servicios:</Text>
+      </View>
       {services && services.length > 0 &&  (
       <>
         <FlatList
@@ -63,7 +61,7 @@ export default function BranchServices({ navigation }) {
                 <Text>Costo:</Text>
                 <Text style={styles.text}>{ item.serviceCost }</Text>
                 <Text>Duración</Text>
-                <Text style={styles.text}>{ item.serviceDuration }</Text>
+                <Text style={styles.text}>{ item.serviceDuration } min.</Text>
               </View> 
                   <Button
                     color='#765d3f'
@@ -112,6 +110,9 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  vTitle:{
+     justifyContent: 'center'
   },
   title: {
     fontSize: 24,

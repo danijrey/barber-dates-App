@@ -15,12 +15,10 @@ export default function BranchEmployees({ navigation }) {
       .then(value => setBranchId(value))
       
   }, [branchId]);
-   console.log(branchId);
 
  
 useEffect(() => {
 
-    console.log(branchId);
     axios({
       method: 'GET',
       baseURL: 'http://localhost:8080',
@@ -71,6 +69,8 @@ const styles = StyleSheet.create({
   },
   description: {
     backgroundColor: '#765d3f',
+    borderRadius: 3,
+    padding: 5,
     alignItems: 'center',
     justifyContent: 'center',
     width: 250,
