@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Button, FlatList, Image, ImageBackground } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios'
 
@@ -19,21 +17,9 @@ export default function BranchEmployees({ navigation }) {
   }, [branchId]);
    console.log(branchId);
 
-/*    const getData = async () => {
-    try {
-      const value = await AsyncStorage.getItem('branchId');
-      console.log(value);
-      return (value);
-    } catch (error) {
-      // error reading value
-    }
-  }  */
-
-  
-
+ 
 useEffect(() => {
 
-   /* const branchId = getData(); */
     console.log(branchId);
     axios({
       method: 'GET',

@@ -65,7 +65,7 @@ export default function Login({ route, navigation }) {
         defaultValue={clientPassword}
       />
 
-      <Button
+      <Button style={styles.enviarBtn}
         color='#765d3f'
         title="Enviar"
         onPress={handleSubmit}
@@ -109,6 +109,7 @@ const styles = StyleSheet.create({
   input: {
     width: 300,
     height: 40,
+    margin: 5,
     color: '#f2a951',
     borderWidth: 1,
     borderColor: 'black',
@@ -118,6 +119,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
     registroBtn: {
+    width: 130,
+  },
+    enviarBtn: {
     width: 130,
   }
 });

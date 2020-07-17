@@ -31,7 +31,7 @@ export default function BranchServicesEmployees({ route, navigation }) {
     axios({
       method: 'GET',
       baseURL: 'http://localhost:8080',
-      url: `/branchs/${branchId}/employees/list`//corregir Ruta - REVISAR BIEN!!!!
+      url: `/branchs/${branchId}/employees/list`
     })
       .then(({ data }) => setSelectEmployee(data));
 

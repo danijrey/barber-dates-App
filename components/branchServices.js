@@ -42,14 +42,14 @@ export default function BranchServices({ navigation }) {
   console.log(services)
   return (
     <View style={styles.container}>
-      <View>
+{/*       <View>
         <Image
           style={styles.imageDeco}
           source={{ uri: 'https://res.cloudinary.com/danijrey/image/upload/v1594923438/LogoMakr_9u9qDe_jmdblh.png' }}
         />
 
-      </View>
-      <Text style={styles.title}>En nuestra sede te prestamos éstos servicios:</Text>
+      </View> */}
+      <Text style={styles.title}>En nuestra sede te prestamos los siguientes servicios:</Text>
       
       {services && services.length > 0 &&  (
       <>
@@ -141,7 +141,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttons: {
-    /* alignItems: "flex-start", */
     flexWrap: 'wrap',
     marginTop: 10,
     alignContent: 'space-around',

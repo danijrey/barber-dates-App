@@ -68,7 +68,7 @@ export default function BranchHome({ route, navigation }) {
               onPress={() =>{
                 storeData(branch.id);
                 navigation.navigate('Services', { id: branch.id });
-              } } //Guardar este ID en el LocalStorage!!!!! como idBranch
+              } } //Guardar este ID en el LocalStorage!!!!! como branchId
             />
           </View>
         </View>
@@ -138,8 +138,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   imageLogo: {
-/*     display: 'flex',
-    padding: 20, */
     width: 350,
     height: 200,
   },
@@ -176,4 +174,3 @@ const styles = StyleSheet.create({
   }
 
 });
-/* flexDirection: 'row', */

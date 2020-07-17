@@ -41,6 +41,7 @@ export default function SignUp({ route, navigation }) {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.title}>Crea tu cuenta</Text>
       <TextInput
         style={styles.input}
         placeholder="Ingresa tu nombre"
@@ -106,6 +107,7 @@ const styles = StyleSheet.create({
   input: {
     width: 300,
     height: 40,
+    margin: 5,
     color: '#f2a951',
     borderWidth: 1,
     borderColor: 'black',

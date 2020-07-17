@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Button, FlatList, Image, ImageBackground } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
- import { Logo } from '../assets/Logo.png';
 import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios'
 
@@ -24,7 +21,10 @@ export default function Home({ navigation }){
       baseURL: 'http://localhost:8080',
       url: '/branchs/all'
     })
-      .then(({ data }) => setBranchs(data));
+      .then(({ data }) => setBranchs(data))
+/*       .catch (error => {
+        console.log(error)
+      }) */
   }, []);
 
 
@@ -60,7 +60,7 @@ export default function Home({ navigation }){
               onPress={() => {
                 storeData(item.id);
                 navigation.navigate('Branch', { id: item.id }) 
-              }} //Guardar este ID en el LocalStorage!!!!! como idBranch
+                }}  //Guardar este ID en el LocalStorage!!!!! como branchId
             />
           </View>
           </>
@@ -128,4 +128,3 @@ const styles = StyleSheet.create({
   }
 });
 
-/* { require('./my-icon.png') }  */

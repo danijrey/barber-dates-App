@@ -115,7 +115,7 @@ export default function Appointment({ route, navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Información de tu próxima cita:</Text>
+      <Text style={styles.title}>Información de tu próxima cita</Text>
       <Text style={styles.subTitle}>Sede:</Text>
       <Text style={styles.text}>{branch}</Text>
       <Text style={styles.subTitle}>Servicio:</Text>
@@ -124,11 +124,11 @@ export default function Appointment({ route, navigation }) {
       <Text style={styles.text}>{employee}</Text>
 
       <Text style={styles.subTitle}>Selecciona el día de tu cita:</Text>
-      <Picker
+      <Picker style={styles.picker}
         /* selectedValue={setTime({ value })} */
         style={{ height: 50, width: 200 }}
         onValueChange={(dValue) =>
-          setDate({ date: dValue })
+          setDate(dValue)
         }>
         
         <Picker.Item label={today.getDate() + 1} value={(today.getDate() + 1)} />
@@ -143,10 +143,11 @@ export default function Appointment({ route, navigation }) {
       
       <Text style={styles.subTitle}>Selecciona la Hora:</Text>
         <Picker
+        style={styles.picker}
         /* selectedValue={setTime({ value })} */
         style={{ height: 50, width: 200 }}
         onValueChange={(tValue) =>
-          setTime({ time: tValue })
+          setTime(tValue)
         }>
         <Picker.Item label="8:00 am" value="8" />
         <Picker.Item label="9:00 am" value="9" />
@@ -164,6 +165,7 @@ export default function Appointment({ route, navigation }) {
 
 
       <Button
+        color='#765d3f'
         title="Confirmar"
         onPress={() => navigation.navigate('Confirmed',
           SendDbAppointment()
@@ -184,6 +186,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  subTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#765d3f',
+    justifyContent: 'center'
+  },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
@@ -201,9 +209,11 @@ const styles = StyleSheet.create({
     height: 40,
     color: '#f2a951',
     borderWidth: 1,
+    backgroundColor: '#272c33',
     borderColor: 'black',
   },
-  body: {
-    fontSize: 16
+  picker: {
+    fontSize: 16,
+    backgroundColor: '#272c33',
   }
 });
