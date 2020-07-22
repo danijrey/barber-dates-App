@@ -75,10 +75,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: 250,
   },
+  employeeDescription:{
+    fontSize: 16,
+  },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: 400,
     color: '#765d3f',
+    textAlign: 'center',
     justifyContent: 'center'
   },
   subTitle: {
@@ -90,6 +94,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 17,
     marginBottom: 15,
+    textAlignVertical: 'center',
     color: '#272c33',
     alignItems: 'center',
   },

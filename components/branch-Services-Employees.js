@@ -99,8 +99,9 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: '400',
     color: '#765d3f',
+    textAlign: 'center',
     justifyContent: 'center'
   },
   subTitle: {
@@ -110,7 +111,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   text: {
-    fontSize: 17,
+    fontSize: 20,
     marginBottom: 15,
     color: '#f2a951',
     alignItems: 'center',

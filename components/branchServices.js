@@ -60,18 +60,19 @@ export default function BranchServices({ navigation }) {
                 <Text style={styles.subTitle}>{ item.serviceName }</Text>
                 <Text>Costo:</Text>
                 <Text style={styles.text}>{ item.serviceCost }</Text>
-                <Text>Duración</Text>
+                <Text>Duración:</Text>
                 <Text style={styles.text}>{ item.serviceDuration } min.</Text>
               </View> 
-                  <Button
-                    color='#765d3f'
-                    title="Seleccionar"
-                    onPress={() => {
-                      storeData(item.id);
-                      navigation.navigate('Select', { id: item.id });
-                    }}//Guardar este Id en el LocalStotage!!! como serviceId
+              <View style={styles.selectBtn}>
+                <Button
+                  color='#765d3f'
+                  title="Seleccionar"
+                  onPress={() => {
+                    storeData(item.id);
+                    navigation.navigate('Select', { id: item.id });
+                  }}//Guardar este Id en el LocalStotage!!! como serviceId
                 />
-              
+              </View>
             </View>
           )}
           keyExtractor={(item) => `${item.id}`}
@@ -116,13 +117,14 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: 400,
     color: '#765d3f',
+    textAlign: 'center',
     justifyContent: 'center'
   },
   subTitle: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: 600,
     color: '#272c33',
     justifyContent: 'center'
   },
@@ -146,7 +148,11 @@ const styles = StyleSheet.create({
     marginTop: 10,
     alignContent: 'space-around',
   },
-  btn: {
-    marginTop: 10,
-  }
+/*     selectBtn: {
+    width: 250,
+    height: 'auto',
+    alignItems: 'center',
+    alignContent: 'center',
+    justifyContent: 'center',
+  }  */
 });
